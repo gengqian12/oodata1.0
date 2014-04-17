@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ifengNews">
+    <resultMap id="ifengNewsResult" class="com.oo.model.IfengNews">
+        <result column="id" property="id" />
+        <result column="type" property="type" />
+        <result column="message" property="message" />
+        <result column="address" property="address" />
+        <result column="key_word" property="keyWord" />
+        <result column="mapx" property="mapx" />
+        <result column="mapy" property="mapy" />
+        <result column="from_site" property="fromSite" />
+        <result column="status" property="status" />
+        <result column="create_date" property="createDate" />
+        <result column="update_date" property="updateDate" />
+        <result column="create_user" property="createUser" />
+        <result column="update_user" property="updateUser" />
+    </resultMap>
+    <insert id="insert" parameterClass="com.oo.model.IfengNews">
+        insert into ifeng_news (id, type, message, address, key_word, mapx, mapy, from_site, status,
+            create_date, update_date, create_user, update_user)
+        values (#id#, #type#, #message#, #address#, #keyWord#, #mapx#, #mapy#, #fromSite#, #status#,
+            #createDate#, #updateDate#, #createUser#, #updateUser#)
+    </insert>
+    <select id="queryIfengNewsByMap" resultMap="ifengNewsResult" parameterClass="java.util.Map">
+        select id, type, message, address, key_word, mapx, mapy, from_site, status, create_date,
+            update_date, create_user, update_user
+        from ifeng_news
+        where 
+			1= 1
+			<isNotNull prepend="and" property="keyWord">
+			key_word = #keyWord#
+			</isNotNull>
+    </select>
+</sqlMap>

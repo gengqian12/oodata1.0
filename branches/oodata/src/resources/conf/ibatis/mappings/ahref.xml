@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="ahref">
+    <resultMap id="aherfResult" class="com.oo.model.Ahref">
+        <result column="id" property="id" />
+        <result column="href" property="href" />
+        <result column="status" property="status" />
+    </resultMap>
+    <insert id="insert" parameterClass="com.oo.model.Ahref">
+        insert into aherf (href, status)
+        values (#href#, #status#)
+    </insert>
+    <update id="updateByPrimaryKey" parameterClass="com.oo.model.Ahref">
+        update aherf
+        set href = #href#,
+            status = #status#
+        where id = #id#
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterClass="com.oo.model.Ahref">
+        update aherf
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="href">
+                href = #href#
+            </isNotNull>
+            <isNotNull prepend="," property="status">
+                status = #status#
+            </isNotNull>
+        </dynamic>
+        where id = #id#
+    </update>
+    <delete id="deleteByPrimaryKey" parameterClass="com.oo.model.Ahref">
+        delete from aherf
+        where id = #id#
+    </delete>
+    <select id="getByPrimaryKey" resultMap="aherfResult" parameterClass="com.oo.model.Ahref">
+        select id, href, status
+        from aherf
+        where id = #id#
+    </select>
+</sqlMap>
